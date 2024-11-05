@@ -1,0 +1,17 @@
+/.classpath
+/.project
+/.settings/
+/target/
+.metadata/
+/logs
+/*.log
+/src/main/gen/
+/.temp*
+### IntelliJ IDEA ###
+/*.DS_Store
+.idea
+*.iws
+*.iml
+*.ipr
+/.apt_generated/
+report.jasper
