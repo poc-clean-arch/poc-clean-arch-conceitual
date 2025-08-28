@@ -12,5 +12,6 @@ public class Infracao {
 	private Long id;
 	private LocalDateTime dataHora;
 	private String descricao;
+	private Boolean grave;
 	private BigDecimal valor;
 }

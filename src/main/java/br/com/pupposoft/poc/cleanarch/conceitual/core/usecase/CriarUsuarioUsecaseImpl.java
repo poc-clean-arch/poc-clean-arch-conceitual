@@ -1,13 +1,15 @@
 package br.com.pupposoft.poc.cleanarch.conceitual.core.usecase;
 
-import java.util.Optional;
+import java.math.BigDecimal;
 
 import br.com.pupposoft.poc.cleanarch.conceitual.core.domain.Motorista;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.exception.UsuarioComAutomovelAntigoException;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.exception.UsuarioExistenteException;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.exception.UsuarioMenorIdadeException;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.exception.UsuarioSemAutomovelCadastradoException;
+import br.com.pupposoft.poc.cleanarch.conceitual.core.gateway.InfracaoGateway;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.gateway.MotoristaGateway;
+import br.com.pupposoft.poc.cleanarch.conceitual.core.gateway.NotificacaoGateway;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,19 +18,36 @@ import lombok.extern.slf4j.Slf4j;
 public class CriarUsuarioUsecaseImpl implements CriarUsuarioUsecase {
 
 	private final MotoristaGateway motoritaGateway;
+	private final InfracaoGateway infracaoGateway;
+	private final ObterCalculadoraMultaUsecase obterCalculadoraMultaUsecase;
+	private final NotificacaoGateway notificacaoGateway;
 
 	@Override
-	public Long criar(Motorista motorista) {
+	public Long criar(Motorista novoMotorista) {
 
-		Optional<Motorista> motoristaOp = motoritaGateway.obterPorCpf(motorista.getCpf());
+		obterCalculadoraMulta(novoMotorista);
 		
-		aplicarRegras(motorista, motoristaOp);
+		obterInfracoes(novoMotorista);
 		
-		return motoritaGateway.criar(motorista);
+		aplicarRegras(novoMotorista);
+		
+		return motoritaGateway.criar(novoMotorista);
 	}
 
-	private void aplicarRegras(Motorista motorista, Optional<Motorista> motoristaOp) {
-		if(motoristaOp.isPresent()) {
+	private void obterInfracoes(Motorista novoMotorista) {
+		var infracoes = infracaoGateway.obterPorCpf(novoMotorista.getCpf());
+		novoMotorista.atualizarInfracoes(infracoes);
+	}
+
+	private void obterCalculadoraMulta(Motorista novoMotorista) {
+		var calculadora = obterCalculadoraMultaUsecase.obter(novoMotorista);
+		novoMotorista.atualizarCalculadora(calculadora);
+	}
+
+	private void aplicarRegras(Motorista motorista) {
+		
+		var motoristaExistenteOp = motoritaGateway.obterPorCpf(motorista.getCpf());
+		if(motoristaExistenteOp.isPresent()) {
 			log.warn("Usuário ja existe com cpf informado. {}", motorista.getCpf());
 			throw new UsuarioExistenteException();
 		}
@@ -46,6 +65,10 @@ public class CriarUsuarioUsecaseImpl implements CriarUsuarioUsecase {
 		if(motorista.temCarroAntigo()) {
 			log.warn("Usuário possui automoveis antigos");
 			throw new UsuarioComAutomovelAntigoException();
+		}
+		
+		if(motorista.getTotalMultas().compareTo(new BigDecimal("15000.0")) >= 0) {
+			notificacaoGateway.notificarRisco(motorista);
 		}
 	}
 }

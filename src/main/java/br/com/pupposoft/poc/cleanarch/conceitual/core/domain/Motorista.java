@@ -5,11 +5,9 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class Motorista {
 	private Long id;
 	private String nome;
@@ -17,7 +15,7 @@ public class Motorista {
 	private LocalDate dataNascimento;
 	private List<Automovel> automoveis;
 	private List<Infracao> infracoes;
-	private CalculadoraPrecoMulta calculadoraPreco;
+	private CalculadoraPrecoMulta calculadora;
 	
 	public Motorista(Long id, String nome, String cpf, LocalDate dataNascimento, List<Automovel> automoveis) {
 		this.id = id;
@@ -25,6 +23,10 @@ public class Motorista {
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.automoveis = automoveis;
+	}
+	
+	public Motorista(Long id, String nome, String cpf, LocalDate dataNascimento) {
+		this(id, nome, cpf, dataNascimento, null);
 	}	
 	
 	public Long getIdade() {
@@ -44,6 +46,18 @@ public class Motorista {
 	}
 	
 	public BigDecimal getTotalMultas() {
-		return calculadoraPreco.calcular(infracoes);
+		return calculadora.calcular(infracoes);
+	}
+	
+	public void atualizarInfracoes(List<Infracao> infracoes) {
+		this.infracoes = infracoes;
+	}
+
+	public void atualizarCalculadora(CalculadoraPrecoMulta calculadora) {
+		this.calculadora = calculadora;
+	}
+	
+	public boolean possuiInfracaoGrave() {
+		return infracoes.stream().anyMatch(Infracao::getGrave);
 	}
 }
