@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="Usuario")
+@Table(name="Motorista")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioEntity  {
+public class MotoristaEntity  {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,6 @@ public class UsuarioEntity  {
 	private String cpf;
 	private String nome;
 	private LocalDate dataNascimento;
-	
+	private Double totalMultas;
 	private List<AutomovelEntity> automoveis;
 }

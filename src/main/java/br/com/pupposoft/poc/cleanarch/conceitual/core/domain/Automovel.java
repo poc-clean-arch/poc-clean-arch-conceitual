@@ -11,7 +11,7 @@ public class Automovel {
 	private Long id;
 	private String modelo;
 	private LocalDate dataModelo;
-	private Usuario usuario;
+	private Motorista motorista;
 	
 	public boolean isAntigo() {
 		return dataModelo.isBefore(LocalDate.now().minusYears(3));

@@ -32,5 +32,5 @@ public class AutomovelEntity  {
 	private LocalDate dataModelo;
 	
 	@ManyToOne
-	private UsuarioEntity usuario;
+	private MotoristaEntity motorista;
 }

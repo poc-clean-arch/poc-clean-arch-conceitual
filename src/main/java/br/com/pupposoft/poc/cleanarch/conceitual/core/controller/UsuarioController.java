@@ -1,26 +1,21 @@
 package br.com.pupposoft.poc.cleanarch.conceitual.core.controller;
 
-import br.com.pupposoft.poc.cleanarch.conceitual.core.domain.Usuario;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.dto.CriarUsuarioInputDto;
+import br.com.pupposoft.poc.cleanarch.conceitual.core.mapper.MotoristaMapper;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.usecase.CriarUsuarioUsecase;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UsuarioController {
 
-	private CriarUsuarioUsecase criarUsuarioUsecase;
+	private final CriarUsuarioUsecase criarUsuarioUsecase;
+	
+	private final MotoristaMapper motoristaMapper;
 	
 	public Long criar(CriarUsuarioInputDto criarUsuarioInputDto) {
-		return criarUsuarioUsecase.criar(mapToDomain(criarUsuarioInputDto));
-	}
-
-	private Usuario mapToDomain(CriarUsuarioInputDto criarUsuarioInputDto) {
-		return new Usuario(
-				criarUsuarioInputDto.getId(),
-				criarUsuarioInputDto.getNome(),
-				criarUsuarioInputDto.getCpf(),
-				criarUsuarioInputDto.getDataNascimento(),
-				null//FIXME: implementar lista de automoveis NOSONAR
-				);
+		
+		var motorista = motoristaMapper.map(criarUsuarioInputDto);
+		
+		return criarUsuarioUsecase.criar(motorista);
 	}
 }
