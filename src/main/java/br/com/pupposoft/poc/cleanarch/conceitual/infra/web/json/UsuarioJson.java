@@ -1,4 +1,4 @@
-package br.com.pupposoft.poc.cleanarch.conceitual.adapter.web.json;
+package br.com.pupposoft.poc.cleanarch.conceitual.infra.web.json;
 
 import java.time.LocalDate;
 

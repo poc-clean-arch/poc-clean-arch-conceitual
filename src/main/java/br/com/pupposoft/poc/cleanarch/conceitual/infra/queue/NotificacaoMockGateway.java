@@ -1,4 +1,4 @@
-package br.com.pupposoft.poc.cleanarch.conceitual.adapter.queue;
+package br.com.pupposoft.poc.cleanarch.conceitual.infra.queue;
 
 import org.springframework.stereotype.Component;
 

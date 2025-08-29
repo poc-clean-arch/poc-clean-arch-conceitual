@@ -1,13 +1,13 @@
-package br.com.pupposoft.poc.cleanarch.conceitual.adapter.web;
+package br.com.pupposoft.poc.cleanarch.conceitual.infra.web;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.pupposoft.poc.cleanarch.conceitual.adapter.web.json.UsuarioJson;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.controller.UsuarioController;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.dto.CriarUsuarioInputDto;
+import br.com.pupposoft.poc.cleanarch.conceitual.infra.web.json.UsuarioJson;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,15 +1,15 @@
-package br.com.pupposoft.poc.cleanarch.conceitual.adapter.database.jpa;
+package br.com.pupposoft.poc.cleanarch.conceitual.infra.database.jpa;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import br.com.pupposoft.poc.cleanarch.conceitual.adapter.database.jpa.entity.MotoristaEntity;
-import br.com.pupposoft.poc.cleanarch.conceitual.adapter.database.jpa.repository.MotoristaRepository;
-import br.com.pupposoft.poc.cleanarch.conceitual.adapter.database.mapper.MotoristaMapper;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.domain.Motorista;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.exception.ErroAoAcessarRepositorioException;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.gateway.MotoristaGateway;
+import br.com.pupposoft.poc.cleanarch.conceitual.infra.database.jpa.entity.MotoristaEntity;
+import br.com.pupposoft.poc.cleanarch.conceitual.infra.database.jpa.repository.MotoristaRepository;
+import br.com.pupposoft.poc.cleanarch.conceitual.infra.database.mapper.MotoristaMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,9 +50,9 @@ public class UsuarioJpaGateway implements MotoristaGateway {
 	@Override
 	public Long criar(Motorista motorista) {
 		try {
-
+			
 			MotoristaEntity motoristaEntity = mapper.map(motorista);
-
+			
 			return motoristaRepository.save(motoristaEntity).getId();
 
 		} catch (Exception e) {

@@ -25,9 +25,9 @@ public class CriarUsuarioUsecaseImpl implements CriarUsuarioUsecase {
 	@Override
 	public Long criar(Motorista novoMotorista) {
 
-		obterCalculadoraMulta(novoMotorista);
-		
 		obterInfracoes(novoMotorista);
+		
+		obterCalculadoraMulta(novoMotorista);
 		
 		aplicarRegras(novoMotorista);
 		

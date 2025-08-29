@@ -1,10 +1,11 @@
-package br.com.pupposoft.poc.cleanarch.conceitual.config;
+package br.com.pupposoft.poc.cleanarch.conceitual.infra.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
+import br.com.pupposoft.poc.cleanarch.conceitual.core.domain.Motorista;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.gateway.InfracaoGateway;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.gateway.MotoristaGateway;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.gateway.NotificacaoGateway;
@@ -36,4 +37,5 @@ public class InjecaoDependenciaConfiguration {
 	public ObterCalculadoraMultaUsecase obterCalculadoraMultaUsecase() {
 		return new ObterCalculadoraMultaUsecase();
 	}
+
 }

@@ -1,4 +1,4 @@
-package br.com.pupposoft.poc.cleanarch.conceitual.adapter.database.jpa.entity;
+package br.com.pupposoft.poc.cleanarch.conceitual.infra.database.jpa.entity;
 
 import java.time.LocalDate;
 

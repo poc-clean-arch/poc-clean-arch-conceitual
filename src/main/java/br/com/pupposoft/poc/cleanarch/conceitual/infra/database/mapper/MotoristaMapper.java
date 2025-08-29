@@ -1,11 +1,11 @@
-package br.com.pupposoft.poc.cleanarch.conceitual.adapter.database.mapper;
+package br.com.pupposoft.poc.cleanarch.conceitual.infra.database.mapper;
 
 import org.springframework.stereotype.Component;
 
-import br.com.pupposoft.poc.cleanarch.conceitual.adapter.database.jpa.entity.AutomovelEntity;
-import br.com.pupposoft.poc.cleanarch.conceitual.adapter.database.jpa.entity.MotoristaEntity;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.domain.Automovel;
 import br.com.pupposoft.poc.cleanarch.conceitual.core.domain.Motorista;
+import br.com.pupposoft.poc.cleanarch.conceitual.infra.database.jpa.entity.AutomovelEntity;
+import br.com.pupposoft.poc.cleanarch.conceitual.infra.database.jpa.entity.MotoristaEntity;
 
 @Component
 public class MotoristaMapper {
