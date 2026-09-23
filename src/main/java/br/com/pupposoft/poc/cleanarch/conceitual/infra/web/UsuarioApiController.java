@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UsuarioApiController {
 	
     private UsuarioController usuarioController;
-	
+    
 	@PostMapping
 	public Long criar(@Valid @RequestBody UsuarioJson usuarioJson) {
 		return usuarioController.criar(mapToDto(usuarioJson));

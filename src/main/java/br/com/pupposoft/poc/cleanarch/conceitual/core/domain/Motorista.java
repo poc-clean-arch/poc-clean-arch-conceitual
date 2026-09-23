@@ -2,11 +2,15 @@ package br.com.pupposoft.poc.cleanarch.conceitual.core.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import br.com.pupposoft.poc.cleanarch.conceitual.core.exception.UsuarioMenorIdadeException;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Getter
 public class Motorista {
 	private Long id;
@@ -16,6 +20,7 @@ public class Motorista {
 	private List<Automovel> automoveis;
 	private List<Infracao> infracoes;
 	private CalculadoraPrecoMulta calculadora;
+	private LocalDateTime dataCriacao;
 	
 	public Motorista(Long id, String nome, String cpf, LocalDate dataNascimento, List<Automovel> automoveis) {
 		this.id = id;
@@ -23,6 +28,8 @@ public class Motorista {
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.automoveis = automoveis;
+		
+		dataCriacao = LocalDateTime.now();
 	}
 	
 	public Motorista(Long id, String nome, String cpf, LocalDate dataNascimento) {
@@ -60,4 +67,18 @@ public class Motorista {
 	public boolean possuiInfracaoGrave() {
 		return infracoes.stream().anyMatch(Infracao::getGrave);
 	}
+	
+	protected void adicionarAutomovel(Automovel novoAutomovel) {
+		if(isMenorIdade()) {
+			log.warn("Usuário menor de idade. idade={}", getIdade());
+			throw new UsuarioMenorIdadeException();
+		}
+		
+		automoveis.add(novoAutomovel);
+	}
+	
+	public void alterarStatus(String status) {
+		//Muda o stado do objeto.
+	}
+	
 }

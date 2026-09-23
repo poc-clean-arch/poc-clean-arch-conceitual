@@ -51,6 +51,8 @@ public class UsuarioJpaGateway implements MotoristaGateway {
 	public Long criar(Motorista motorista) {
 		try {
 			
+			motorista.alterarStatus("DEMITIDO");
+			
 			MotoristaEntity motoristaEntity = mapper.map(motorista);
 			
 			return motoristaRepository.save(motoristaEntity).getId();

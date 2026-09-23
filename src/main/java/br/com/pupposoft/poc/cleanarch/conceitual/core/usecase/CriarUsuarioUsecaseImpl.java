@@ -24,7 +24,7 @@ public class CriarUsuarioUsecaseImpl implements CriarUsuarioUsecase {
 
 	@Override
 	public Long criar(Motorista novoMotorista) {
-
+		
 		obterInfracoes(novoMotorista);
 		
 		obterCalculadoraMulta(novoMotorista);
@@ -45,7 +45,6 @@ public class CriarUsuarioUsecaseImpl implements CriarUsuarioUsecase {
 	}
 
 	private void aplicarRegras(Motorista motorista) {
-		
 		var motoristaExistenteOp = motoritaGateway.obterPorCpf(motorista.getCpf());
 		if(motoristaExistenteOp.isPresent()) {
 			log.warn("Usuário ja existe com cpf informado. {}", motorista.getCpf());
