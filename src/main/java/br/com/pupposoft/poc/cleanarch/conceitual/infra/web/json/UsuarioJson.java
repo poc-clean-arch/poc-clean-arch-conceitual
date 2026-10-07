@@ -1,6 +1,7 @@
 package br.com.pupposoft.poc.cleanarch.conceitual.infra.web.json;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,4 +21,6 @@ public class UsuarioJson {
 
 	@NotNull
 	private LocalDate dataNascimento;
+
+	private List<Long> automoveisIds;
 }

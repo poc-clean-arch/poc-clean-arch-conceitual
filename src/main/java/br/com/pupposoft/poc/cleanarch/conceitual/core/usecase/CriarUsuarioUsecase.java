@@ -1,9 +1,10 @@
 package br.com.pupposoft.poc.cleanarch.conceitual.core.usecase;
 
-import br.com.pupposoft.poc.cleanarch.conceitual.core.domain.Motorista;
+import br.com.pupposoft.poc.cleanarch.conceitual.core.dto.CriarMotoristaInputDto;
+import br.com.pupposoft.poc.cleanarch.conceitual.core.dto.CriarMotoristaOutputDto;
 
 public interface CriarUsuarioUsecase {
 
-	Long criar(Motorista usuario);
+	CriarMotoristaOutputDto criar(CriarMotoristaInputDto inputDto);
 
 }

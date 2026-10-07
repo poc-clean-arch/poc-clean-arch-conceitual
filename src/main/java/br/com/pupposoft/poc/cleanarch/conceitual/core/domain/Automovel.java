@@ -2,10 +2,13 @@ package br.com.pupposoft.poc.cleanarch.conceitual.core.domain;
 
 import java.time.LocalDate;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Automovel {
 	private Long id;

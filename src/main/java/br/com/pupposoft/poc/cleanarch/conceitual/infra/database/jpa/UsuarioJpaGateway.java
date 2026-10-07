@@ -2,6 +2,7 @@ package br.com.pupposoft.poc.cleanarch.conceitual.infra.database.jpa;
 
 import java.util.Optional;
 
+import br.com.pupposoft.poc.cleanarch.conceitual.core.factory.MotoristaFactory;
 import org.springframework.stereotype.Component;
 
 import br.com.pupposoft.poc.cleanarch.conceitual.core.domain.Motorista;
@@ -19,7 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 public class UsuarioJpaGateway implements MotoristaGateway {
 
 	private final MotoristaRepository motoristaRepository;
-	
+	private final MotoristaFactory motoristaFactory;
+
 	private final MotoristaMapper mapper;
 
 	@Override
@@ -34,6 +36,8 @@ public class UsuarioJpaGateway implements MotoristaGateway {
 			}
 
 			var motoristaEntity = motoristaEntityOp.get();
+
+
 
 			var motorista = mapper.map(motoristaEntity);
 
@@ -50,8 +54,10 @@ public class UsuarioJpaGateway implements MotoristaGateway {
 	@Override
 	public Long criar(Motorista motorista) {
 		try {
-			
-			motorista.alterarStatus("DEMITIDO");
+
+			//TODO: salvar automoveis
+
+			motorista.alterarStatus("DEMITIDO");//TODO: Explicar
 			
 			MotoristaEntity motoristaEntity = mapper.map(motorista);
 			
