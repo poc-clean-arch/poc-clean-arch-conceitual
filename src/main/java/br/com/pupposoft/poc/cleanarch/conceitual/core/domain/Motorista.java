@@ -7,11 +7,14 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import br.com.pupposoft.poc.cleanarch.conceitual.core.exception.UsuarioMenorIdadeException;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Getter
+@Builder(access = AccessLevel.PROTECTED)
 public class Motorista {
 	private Long id;
 	private String nome;
@@ -21,21 +24,14 @@ public class Motorista {
 	private List<Infracao> infracoes;
 	private CalculadoraPrecoMulta calculadora;
 	private LocalDateTime dataCriacao;
-	
-	public Motorista(Long id, String nome, String cpf, LocalDate dataNascimento, List<Automovel> automoveis) {
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-		this.automoveis = automoveis;
-		
-		dataCriacao = LocalDateTime.now();
+	private LocalDateTime dataInativacao;
+	private Boolean ativo;
+
+	public void inativar(){
+		ativo = false;
+		dataInativacao = LocalDateTime.now();
 	}
-	
-	public Motorista(Long id, String nome, String cpf, LocalDate dataNascimento) {
-		this(id, nome, cpf, dataNascimento, null);
-	}	
-	
+
 	public Long getIdade() {
 		return dataNascimento.until(LocalDate.now(), ChronoUnit.YEARS);
 	}
@@ -78,7 +74,11 @@ public class Motorista {
 	}
 	
 	public void alterarStatus(String status) {
-		//Muda o stado do objeto.
+		//TODO: Muda o stado do objeto.
+	}
+
+	public boolean totalMultasExcedido(){
+		return getTotalMultas().compareTo(new BigDecimal("15000.0")) >= 0;
 	}
 	
 }

@@ -3,11 +3,7 @@ package br.com.pupposoft.poc.cleanarch.conceitual.infra.database.jpa.entity;
 import java.time.LocalDate;
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,5 +26,7 @@ public class MotoristaEntity  {
 	private String nome;
 	private LocalDate dataNascimento;
 	private Double totalMultas;
+
+	@OneToMany
 	private List<AutomovelEntity> automoveis;
 }

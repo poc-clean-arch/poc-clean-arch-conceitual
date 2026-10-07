@@ -1,5 +1,7 @@
 package br.com.pupposoft.poc.cleanarch.conceitual.infra.database.mapper;
 
+import br.com.pupposoft.poc.cleanarch.conceitual.core.factory.MotoristaFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import br.com.pupposoft.poc.cleanarch.conceitual.core.domain.Automovel;
@@ -8,10 +10,13 @@ import br.com.pupposoft.poc.cleanarch.conceitual.infra.database.jpa.entity.Autom
 import br.com.pupposoft.poc.cleanarch.conceitual.infra.database.jpa.entity.MotoristaEntity;
 
 @Component
+@RequiredArgsConstructor
 public class MotoristaMapper {
 
+	private final MotoristaFactory motoristaFactory;
+
 	public Motorista map(MotoristaEntity motoristaEntity) {
-		
+		//FIXME: Criar factory de automovel
 		var automoveis = motoristaEntity
 		.getAutomoveis()
 		.stream()
@@ -22,12 +27,7 @@ public class MotoristaMapper {
 					null))
 		.toList();
 		
-		return new Motorista(
-				motoristaEntity.getId(), 
-				motoristaEntity.getNome(), 
-				motoristaEntity.getCpf(), 
-				motoristaEntity.getDataNascimento(), 
-				automoveis);
+		return motoristaFactory.criar(motoristaEntity.getId(), motoristaEntity.getNome(), motoristaEntity.getCpf(), motoristaEntity.getDataNascimento(), automoveis);
 	}
 
 	public MotoristaEntity map(Motorista motorista) {
